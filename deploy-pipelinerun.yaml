@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  generateName: deploy-pipelinerun
+spec:
+  pipelineRef:
+    name: deploy-pipeline
+    trigger:
+      type: manual
+      serviceAccount: 'pipeline'
+    resources:
+    - name: app-git
+      resourceRef:
+      name: nodejs-ex-git
+    - name: app-image
+      resourceRef:
+      name: nodejs-ex-image
